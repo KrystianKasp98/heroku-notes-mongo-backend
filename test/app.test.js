@@ -29,6 +29,7 @@ describe("test /notes path", () => {
   it.todo("Should handle POST item and DELETE item");
   it.todo("Should handle PUT item");
   it.todo("Should handle some helper funtions");
+  it.todo("Use in project: husky, webpack, eslint");
 });
 
 describe("test error request", () => {
