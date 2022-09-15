@@ -1,5 +1,5 @@
 const config = require("../config");
-
+const { app } = require("../app");
 /**
  * 
  * @param {Request} req 
@@ -61,5 +61,6 @@ const mapTypes = (properties) => {
 
   return mappedObject;
 }
+
 
 module.exports = { handleRequest, formatMongoQuery, checkIfWrongPropertyTypes, mapTypes };

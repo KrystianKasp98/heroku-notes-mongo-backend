@@ -21,6 +21,12 @@ module.exports = {
     query: "object",
     options: "object",
   },
+  method: {
+    GET: "get",
+    POST: "post",
+    PUT: "put",
+    DELETE: "delete"
+  },
   test: [
     {
       _id: "631fa7de7872b9c0321f974c",
