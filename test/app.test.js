@@ -7,7 +7,7 @@ const { mapTypes, mapReceived, checkIfWrongPropertyTypes } = require("../utils/i
  *
  * @param {"get" | "post" | "put" | "delete"} method
  * @param {string} path
- * @param {false | {id?: string, date?: number, query?: {}, note?: string}} objectToSend
+ * @param {false | {id?: string, date?: number, query?: {note?: string, date?: number, id?: string }, note?: string}} objectToSend
  * @returns {Response}
  */
 const handleTestRes = (method, path, objectToSend = {}) =>
@@ -44,11 +44,7 @@ describe("test /notes path", () => {
 
   test("POST, PUT and DELETE one", async () => {
     const receivedPost = config.tests[2];
-    const post = await handleTestRes(
-      config.method.POST,
-      `${mainPath}/new`,
-      receivedPost
-    );
+    const post = await handleTestRes(config.method.POST, `${mainPath}/new`, receivedPost);
 
     expect(post._body.result.acknowledged).toEqual(true);
     expect(post._body.body).toEqual(config.tests[2]);
@@ -82,11 +78,6 @@ describe("test /notes path", () => {
     expect(del._body.id).toEqual(postedItem._id);
   });
 
-  it.todo("Should handle some helper funtions");
-  it.todo("Handle checking props(mapReceived)");
-  it.todo("handle checking expected props(checkIfWrongPropertyTypes)")
-  it.todo("Test some fail request POST, GET, PUT");
-  it.todo("Describe mongo with JSDOCS");
   it.todo("Use in project: husky, webpack, eslint");
 });
 
@@ -101,27 +92,29 @@ describe("test error request", () => {
   test("delete with null id", async () => {
     const received = { id: null };
     const res = await handleTestRes(config.method.DELETE, mainPath, received);
-
+    const expected = mapTypes(["id"]);
+    const mappedReceived = mapReceived(received);
+    const isWrongRequest = checkIfWrongPropertyTypes(expected, mappedReceived);
+    
     expect(res.statusCode).toEqual(400);
-    expect(res._body.message).toEqual(
-      config.message.badProperty("id", "string")
-    );
+    expect(res._body.message).toEqual(isWrongRequest);
   });
 
   test("delete without id", async () => {
     const res = await handleTestRes(config.method.DELETE, mainPath, false);
+    const expected = mapTypes(["id"]);
+    const isWrongRequest = checkIfWrongPropertyTypes(expected, {});
 
     expect(res.statusCode).toEqual(400);
-    expect(res._body.message).toEqual(
-      config.message.badProperty("id", "string")
-    );
+    expect(res._body.message).toEqual(isWrongRequest);
   });
 
   test("delete with wrong type id", async () => {
     const received = { id: 2137 };
     const res = await handleTestRes(config.method.DELETE, mainPath, received);
     const expected = mapTypes(["id"]);
-    const isWrongRequest = checkIfWrongPropertyTypes(expected, received);
+    const mappedReceived = mapReceived(received);
+    const isWrongRequest = checkIfWrongPropertyTypes(expected, mappedReceived);
 
     expect(res._body.message).toEqual(isWrongRequest);
     expect(res.statusCode).toEqual(400);
@@ -131,7 +124,8 @@ describe("test error request", () => {
     const received = {};
     const res = await handleTestRes(config.method.PUT, mainPath, received);
     const expected = mapTypes(["id", "note", "date"]);
-    const isWrongRequest = checkIfWrongPropertyTypes(expected, received);
+    const mappedReceived = mapReceived(received);
+    const isWrongRequest = checkIfWrongPropertyTypes(expected, mappedReceived);
 
     expect(res._body.message).toEqual(isWrongRequest);
     expect(res.statusCode).toEqual(400);
@@ -141,7 +135,8 @@ describe("test error request", () => {
     const received = { id: 2563235, date: "222333445", note: true };
     const res = await handleTestRes(config.method.PUT, mainPath, received);
     const expected = mapTypes(["id", "note", "date"]);
-    const isWrongRequest = checkIfWrongPropertyTypes(expected, received);
+    const mappedReceived = mapReceived(received);
+    const isWrongRequest = checkIfWrongPropertyTypes(expected, mappedReceived);
 
     expect(res._body.message).toEqual(isWrongRequest);
     expect(res.statusCode).toEqual(400);
@@ -163,7 +158,7 @@ describe("test error request", () => {
   });
 
   test("add with wrong props", async () => {
-    const received = { note: " s" };
+    const received = { note: true, date: '', id: {} };
     const res = await handleTestRes(config.method.POST, `${mainPath}/new`, received);
     const expected = mapTypes(["note", "date"]);
     const mappedReceived = mapReceived(received);

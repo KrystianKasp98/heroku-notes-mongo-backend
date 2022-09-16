@@ -18,7 +18,6 @@ app.post(`${mainPath}/new`, async (req, res) => handleRequest(req, res, addItem)
 app.put(mainPath, async (req, res) => handleRequest(req, res, updateItem));
 app.delete(mainPath, async (req, res) => handleRequest(req, res, deleteItem));
 
-
 app.all("*", (req, res) => {
   res.status(404).send({ message: config.message.badRequest });
 });
@@ -31,9 +30,8 @@ const getAllItems = async(req, res) => {
 const getItems = async (req, res) => {
   let { query, options } = req.body; // options isn't required
   const expected = mapTypes(["query"]);
-  const isWrongRequest = checkIfWrongPropertyTypes(expected, {
-    query: typeof query,
-  });
+  const mappedReceived = mapReceived({ query });
+  const isWrongRequest = checkIfWrongPropertyTypes(expected, mappedReceived);
 
   if (isWrongRequest) {
     res.status(400).send({ message: isWrongRequest });
@@ -46,8 +44,8 @@ const getItems = async (req, res) => {
 const addItem = async (req, res) => {
   const { date, note } = req.body;
   const expected = mapTypes(["note", "date"]);
-  const isWrongRequest = checkIfWrongPropertyTypes(expected, { note: typeof note, date: typeof date });
-  console.log({isWrongRequest});
+  const mappedReceived = mapReceived({ note, date });
+  const isWrongRequest = checkIfWrongPropertyTypes(expected, mappedReceived);
 
   if (isWrongRequest) {
     res.status(400).send({ message: isWrongRequest });
@@ -59,7 +57,8 @@ const addItem = async (req, res) => {
 const updateItem = async (req, res) => {
   const { date, note, id } = req.body;
   const expected = mapTypes(["id", "note", "date"]);
-  const isWrongRequest = checkIfWrongPropertyTypes(expected, { id: typeof id, note: typeof note, date: typeof date });
+  const mappedReceived = mapReceived({ id, note, date });
+  const isWrongRequest = checkIfWrongPropertyTypes(expected, mappedReceived);
 
   if (isWrongRequest) {
     res.status(400).send({ message: isWrongRequest });
@@ -71,7 +70,8 @@ const updateItem = async (req, res) => {
 const deleteItem = async (req, res) => {
   const { id } = req.body;
   const expected = mapTypes(["id"]);
-  const isWrongRequest = checkIfWrongPropertyTypes(expected, { id: typeof id });
+  const mappedReceived = mapReceived({id});
+  const isWrongRequest = checkIfWrongPropertyTypes(expected, mappedReceived);
 
   if (isWrongRequest) {
     res.status(400).send({ message: isWrongRequest });

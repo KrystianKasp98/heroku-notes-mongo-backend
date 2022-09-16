@@ -38,7 +38,7 @@ const formatMongoQuery = (query) => {
 const checkIfWrongPropertyTypes = (expected, received) => {
   let message = "";
   for (let key in expected) {
-    if (expected[key] !== received[key]) {
+    if (expected[key] !== received[key] || received[key] === undefined) {
       message += config.message.badProperty(key, expected[key]);
     }
   }
@@ -65,7 +65,7 @@ const mapTypes = (properties) => {
  */
 const mapReceived = (object) => {
   for (let key in object) {
-    object[key] = typeof key;
+    object[key] = typeof object[key];
   }
   return object
 }
