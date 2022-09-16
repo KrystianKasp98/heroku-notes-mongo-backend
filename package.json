@@ -18,7 +18,7 @@
   "license": "ISC",
   "husky": {
     "hooks": {
-      "pre-push": "npm run eslint:fix && npm run test"
+      "pre-commit": "eslint:fix && test && git add -A ."
     }
   },
   "bugs": {
