@@ -18,7 +18,7 @@
   "license": "ISC",
   "husky": {
     "hooks": {
-      "pre-commit": "eslint:fix && test && git add -A ."
+      "pre-commit": "echo \"[Husky] pre-commit\""
     }
   },
   "bugs": {
