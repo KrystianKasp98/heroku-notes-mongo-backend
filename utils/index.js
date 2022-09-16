@@ -1,5 +1,4 @@
 const config = require("../config");
-const { app } = require("../app");
 /**
  * 
  * @param {Request} req 
@@ -24,7 +23,6 @@ const formatMongoQuery = (query) => {
   // remove case sensitive
   for (let key in query) {
     if (typeof key === "string") {
-      console.log(key);
       query[key] = new RegExp(["^", query[key], "$"].join(""), "i");
     }
   }
@@ -47,7 +45,6 @@ const checkIfWrongPropertyTypes = (expected, received) => {
   return message;
 
 }
-
 /**
  * @info map array of props name to {propName: propType}
  * @param {[string]} properties 
@@ -61,6 +58,16 @@ const mapTypes = (properties) => {
 
   return mappedObject;
 }
+/**
+ * @info it returns mapped object like {id: typeof id, note: typeof note...}
+ * @param {{id?: any, note?: any, date?: any, query?: any, options?: any}} object 
+ * @returns {{id?: any, note?: any, date?: any, query?: any, options?: any}}
+ */
+const mapReceived = (object) => {
+  for (let key in object) {
+    object[key] = typeof key;
+  }
+  return object
+}
 
-
-module.exports = { handleRequest, formatMongoQuery, checkIfWrongPropertyTypes, mapTypes };
+module.exports = { handleRequest, formatMongoQuery, checkIfWrongPropertyTypes, mapTypes, mapReceived };

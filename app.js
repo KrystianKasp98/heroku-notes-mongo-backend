@@ -3,7 +3,7 @@ const { MongoApi } = require("./db/mongo");
 const { json, urlencoded } = require("body-parser");
 const cors = require("cors");
 const config = require("./config");
-const { handleRequest, formatMongoQuery, checkIfWrongPropertyTypes, mapTypes } = require("./utils/index");
+const { handleRequest, formatMongoQuery, checkIfWrongPropertyTypes, mapTypes, mapReceived } = require("./utils/index");
 
 const app = express();
 const mainPath = "/notes"
@@ -47,6 +47,7 @@ const addItem = async (req, res) => {
   const { date, note } = req.body;
   const expected = mapTypes(["note", "date"]);
   const isWrongRequest = checkIfWrongPropertyTypes(expected, { note: typeof note, date: typeof date });
+  console.log({isWrongRequest});
 
   if (isWrongRequest) {
     res.status(400).send({ message: isWrongRequest });
@@ -74,9 +75,10 @@ const deleteItem = async (req, res) => {
 
   if (isWrongRequest) {
     res.status(400).send({ message: isWrongRequest });
+  } else {
+    const result = await MongoApi.deleteItem(id);
+    res.status(400).send({ result, id });
   }
-  const result = await MongoApi.deleteItem(id);
-  res.send({ result, id });
 }
 
 module.exports = { app, mainPath };

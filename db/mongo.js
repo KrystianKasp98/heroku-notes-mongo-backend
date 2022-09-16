@@ -30,7 +30,6 @@ class MongoApi {
     const { note, date } = item;
     const query = { _id: ObjectId(id) };
     const foundItem = await collection.findOne(query);
-    console.log({foundItem});
     const changes = {
       $set: {
         note,

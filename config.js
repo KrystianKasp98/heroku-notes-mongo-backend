@@ -25,9 +25,9 @@ module.exports = {
     GET: "get",
     POST: "post",
     PUT: "put",
-    DELETE: "delete"
+    DELETE: "delete",
   },
-  test: [
+  tests: [
     {
       _id: "631fa7de7872b9c0321f974c",
       note: "test",
