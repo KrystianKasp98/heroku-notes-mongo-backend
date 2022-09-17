@@ -22,10 +22,7 @@ app.all("*", (req, res) => {
   res.status(404).json({message: config.message.badRequest});
 });
 
-
-
 const getAllItems = async (req, res) => {
-  console.log("hii");
   const result = await MongoApi.getItems();
   res.json(result);
 };
