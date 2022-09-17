@@ -78,7 +78,7 @@ describe("test /notes path", () => {
     expect(del._body.id).toEqual(postedItem._id);
   });
 
-  it.todo("Use in project: husky, webpack, eslint");
+  it.todo("Use in project: webpack");
 });
 
 describe("test error request", () => {
