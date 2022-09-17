@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll",
+    "test": "",
+    "test:husky": "jest --forceExit",
     "start": "node index.js",
     "eslint": "eslint .",
-    "eslint:fix": "eslint . --fix"
+    "eslint:fix": "eslint . --fix",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -16,11 +18,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "husky": {
-    "hooks": {
-      "pre-commit": "echo \"[Husky] pre-commit\""
-    }
-  },
   "bugs": {
     "url": "https://github.com/KrystianKasp98/heroku-notes-mongo-backend/issues"
   },

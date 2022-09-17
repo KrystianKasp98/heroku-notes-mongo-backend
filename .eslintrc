@@ -1,4 +1,5 @@
 {
+  "ignorePatterns":["node_modules"],
   "env": {
     "browser": true,
     "es6": true,
@@ -6,6 +7,7 @@
     "jasmine": true
   },
   "parserOptions": {
+    "ecmaVersion": "latest",
     "ecmaFeatures": {
       "arrowFunctions": true,
       "blockBindings": true,
@@ -36,7 +38,6 @@
     "eol-last": 2,
     "indent": [2, 2, { "SwitchCase": 1 }],
     "key-spacing": [2, { "beforeColon": false, "afterColon": true }],
-    "linebreak-style": [2, "unix"],
     "lines-around-comment": 0,
     "max-len": [
       2,
