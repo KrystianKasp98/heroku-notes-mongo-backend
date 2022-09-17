@@ -53,7 +53,7 @@ class MongoApi {
       $set: {
         note,
         date,
-        edits: []
+        edits: [{note: foundItem.note, date: foundItem.date}, ...foundItem.edits],
       },
     };
 
