@@ -42,6 +42,7 @@ const getItems = async (req, res) => {
   }
 };
 
+
 const addItem = async (req, res) => {
   const {date, note} = req.body;
   const expected = mapTypes(["note", "date"]);
