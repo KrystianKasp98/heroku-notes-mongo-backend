@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "",
+    "test": "jest --forceExit",
     "test:husky": "jest --forceExit",
+    "test:watch": "jest --watchAll",
     "start": "node index.js",
     "eslint": "eslint .",
     "eslint:fix": "eslint . --fix",
