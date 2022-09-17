@@ -2,6 +2,7 @@ require("dotenv").config();
 const {MongoClient, ServerApiVersion, ObjectId} = require("mongodb");
 const config = require("../config");
 const uri = process.env.MONGOCLOUD_URL;
+
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
