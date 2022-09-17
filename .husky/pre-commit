@@ -1,10 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run test && npm run eslint:fix
-npm run test
-npm run test && npm run eslint:fix
-npm run test:husky && npm run eslint:fix
-npm run eslint:fix
-npm test:husky && npm eslint:fix
 npm run test:husky && npm run eslint:fix
