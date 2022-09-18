@@ -52,7 +52,9 @@ const checkIfWrongPropertyTypes = (expected, received) => {
 const mapTypes = (properties) => {
   const mappedObject = {};
   properties.forEach(prop => {
-    mappedObject[prop] = config.mappedTypes[prop];
+    if (config.mappedTypes[prop]) {
+      mappedObject[prop] = config.mappedTypes[prop];
+    }
   });
 
   return mappedObject;
@@ -64,7 +66,7 @@ const mapTypes = (properties) => {
  */
 const mapReceived = (object) => {
   for (let key in object) {
-    object[key] = typeof object[key];
+    object[key] = object[key] !== null ? typeof object[key] : "undefined";
   }
   return object;
 };

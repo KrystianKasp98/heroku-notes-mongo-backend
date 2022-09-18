@@ -7,7 +7,6 @@ describe("Test utils methods", () => {
     const received = config.testsUtils.basic[0];
     const edited = formatMongoQuery(received);
 
-    expect(typeof edited).toEqual("object");
     expect(edited).toEqual(config.testsUtils.formated[0]);
   });
 
@@ -29,5 +28,19 @@ describe("Test utils methods", () => {
     const edited3 = checkIfWrongPropertyTypes(expected3, received3);
 
     expect(edited3).toEqual(config.testsUtils.formated[3]);
+  });
+
+  test("mapTypes", () => {
+    const received = config.testsUtils.basic[4];
+    const edited = mapTypes(received);
+
+    expect(edited).toEqual(config.testsUtils.formated[4]);
+  });
+
+  test("mapReceived", () => {
+    const received = config.testsUtils.basic[5];
+    const edited = mapReceived(received);
+
+    expect(edited).toEqual(config.testsUtils.formated[5]);
   });
 });

@@ -85,8 +85,6 @@ describe("Test /notes path", () => {
     expect(del._body.result.deletedCount).toEqual(1);
     expect(del._body.id).toEqual(postedItem._id);
   });
-
-  it.todo("Use in project: webpack");
 });
 
 describe("Test error request", () => {

@@ -1,8 +1,9 @@
 const express = require("express");
-const {MongoApi} = require("./db/mongo");
 const {json, urlencoded} = require("body-parser");
 const cors = require("cors");
+
 const config = require("./config");
+const {MongoApi} = require("./db/mongo");
 const {handleRequest, formatMongoQuery, checkIfWrongPropertyTypes, mapTypes, mapReceived} = require("./utils/index");
 
 const app = express();
@@ -23,6 +24,7 @@ app.all("*", (req, res) => {
 });
 
 const getAllItems = async (req, res) => {
+  console.log("Cookies", req.cookies);
   const result = await MongoApi.getItems();
   res.json(result);
 };

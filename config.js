@@ -69,7 +69,13 @@ module.exports = {
         id: "2131",
         badProp: true,
         date: true
-      }
+      },
+      ["id", "note", "date", "name"],
+      {
+        id: "2131",
+        badProp: true,
+        date: null
+      },
     ],
     formated: [
       {
@@ -79,7 +85,17 @@ module.exports = {
       },
       "You passed wrong property, id must have string type. You passed wrong property, note must have string type.",
       "",
-      "You passed wrong property, date must have number type."
+      "You passed wrong property, date must have number type.",
+      {
+        id: "string",
+        note: "string",
+        date: "number"
+      },
+      {
+        id: "string",
+        badProp: "boolean",
+        date: "undefined"
+      }
     ]
   }
 };
