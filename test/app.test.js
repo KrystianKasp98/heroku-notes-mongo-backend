@@ -23,6 +23,9 @@ const handleTestRes = (method, path, objectToSend = {}) =>
     request(app)[method](path)["set"]("Accept", "application/json");
 
 describe("Test /notes path", () => {
+  it.todo("prepare login authentication, use hashing password");
+  it.todo("add api routes, add values to config");
+  it.todo("refactor app, create auth");
   test("GET all", async () => {
     const res = await handleTestRes(config.method.GET, mainPath, false);
 
