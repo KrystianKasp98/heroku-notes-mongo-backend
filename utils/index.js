@@ -22,7 +22,7 @@ const handleRequest = (req, res, callback) => {
 const formatMongoQuery = (query) => {
   // remove case sensitive
   for (let key in query) {
-    if (typeof key === "string") {
+    if (typeof query[key] === "string" && key !== "id") {
       query[key] = new RegExp(["^", query[key], "$"].join(""), "i");
     }
   }
@@ -39,10 +39,10 @@ const checkIfWrongPropertyTypes = (expected, received) => {
   let message = "";
   for (let key in expected) {
     if (expected[key] !== received[key] || received[key] === undefined) {
-      message += config.message.badProperty(key, expected[key]);
+      message += `${config.message.badProperty(key, expected[key])} `;
     }
   }
-  return message;
+  return message === "" ? message : message.slice(0, -1);
 };
 /**
  * @info map array of props name to {propName: propType}

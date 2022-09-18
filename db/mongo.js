@@ -2,6 +2,7 @@ require("dotenv").config();
 const {MongoClient, ServerApiVersion, ObjectId} = require("mongodb");
 const config = require("../config");
 const uri = process.env.MONGOCLOUD_URL;
+const dbName = process.env.MONGO_DB_NAME;
 
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
@@ -9,7 +10,7 @@ const client = new MongoClient(uri, {
   serverApi: ServerApiVersion.v1,
 });
 
-const collection = client.db("heroku-notes").collection("notes");
+const collection = client.db(dbName).collection("notes");
 
 class MongoApi {
   /**

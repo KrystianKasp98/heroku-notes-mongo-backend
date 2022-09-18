@@ -39,17 +39,6 @@
     "indent": [2, 2, { "SwitchCase": 1 }],
     "key-spacing": [2, { "beforeColon": false, "afterColon": true }],
     "lines-around-comment": 0,
-    "max-len": [
-      2,
-      120,
-      2,
-      {
-        "ignoreUrls": true,
-        "ignoreComments": true,
-        "ignoreTemplateLiterals": true,
-        "ignorePattern": "(import *|require)"
-      }
-    ],
     "no-mixed-spaces-and-tabs": 2,
     "no-multiple-empty-lines": [2, { "max": 2, "maxEOF": 1 }],
     "no-new-object": 2,

@@ -8,7 +8,7 @@ module.exports = {
      * @returns
      */
     badProperty: (name, type) =>
-      `You passed wrong property, ${name} must have ${type} type. `,
+      `You passed wrong property, ${name} must have ${type} type.`,
   },
   sortBy: {
     desc: -1,
@@ -27,7 +27,7 @@ module.exports = {
     PUT: "put",
     DELETE: "delete",
   },
-  tests: [
+  testsApi: [
     {
       _id: "6325ff55e79521788fd0f3d7",
       note: "welcome in my app",
@@ -49,4 +49,37 @@ module.exports = {
       date: 222444334,
     },
   ],
+  testsUtils: {
+    basic: [
+      {
+        date: 2000,
+        id: "2333534534",
+        note: "Welcome"
+      },
+      {
+        id: 2132423,
+        note: true,
+        date: 2142152363
+      },
+      {
+        note: "correct note",
+        id: "correct id"
+      },
+      {
+        id: "2131",
+        badProp: true,
+        date: true
+      }
+    ],
+    formated: [
+      {
+        date: 2000,
+        id: "2333534534",
+        note: /^Welcome$/i
+      },
+      "You passed wrong property, id must have string type. You passed wrong property, note must have string type.",
+      "",
+      "You passed wrong property, date must have number type."
+    ]
+  }
 };
