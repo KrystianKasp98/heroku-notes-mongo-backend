@@ -25,7 +25,7 @@ app.use(json());
 app.use(urlencoded({extended: true}));
 
 // testing middleware for checking auth, remove it for testing, but it works on heroku
-if (!parseInt(process.env.IS_TESTING)) {
+if (process.env.IS_HEROKU) {
   app.use((req, res, next) => {
     console.log(store);
     console.log(`${req.method} - ${req.url}`);
