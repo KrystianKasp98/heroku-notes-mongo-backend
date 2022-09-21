@@ -1,6 +1,8 @@
 module.exports = {
   message: {
-    badRequest: "bad request",
+    badRequest: "Bad request",
+    badAuth: "Bad credentials",
+    failedAuth: "Authorization failed",
     /**
      *
      * @param {string} name property name
