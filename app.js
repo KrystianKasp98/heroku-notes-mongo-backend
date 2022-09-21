@@ -2,8 +2,9 @@ const express = require("express");
 const {json, urlencoded} = require("body-parser");
 const cors = require("cors");
 const session = require("express-session");
-const store = new session.MemoryStore();
+require("dotenv").config();
 
+const store = new session.MemoryStore();
 const config = require("./config");
 const {MongoApi} = require("./db/mongo");
 const {handleRequest, formatMongoQuery, checkIfWrongPropertyTypes, mapTypes, mapReceived} = require("./utils/index");
@@ -13,30 +14,33 @@ const mainPath = "/notes";
 const login = "/login";
 
 app.use(session({
-  secret: "some secret",
+  secret: process.env.SESSION_SECRET,
   cookie: {maxAge: 30000},
   saveUninitialized: false,
-  resave: true, // odnowienie tego samego session id
+  resave: true,
   store
 }));
 app.use(cors());
 app.use(json());
 app.use(urlencoded({extended: true}));
-// testing middleware for checking auth
-// app.use((req, res, next) => {
-//   console.log(store);
-//   console.log(`${req.method} - ${req.url}`);
-//   console.log({ user: req.session.user });
-//   if (req.url.includes(mainPath)) {
-//     if (req.session.authenticated) {
-//       next();
-//     } else {
-//       res.status(403).json({message: "Authorization failed"});
-//     }
-//   } else {
-//     next();
-//   }
-// });
+
+// testing middleware for checking auth, remove it for testing, but it works on heroku
+if (!parseInt(process.env.IS_TESTING)) {
+  app.use((req, res, next) => {
+    console.log(store);
+    console.log(`${req.method} - ${req.url}`);
+    console.log({user: req.session.user});
+    if (req.url.includes(mainPath)) {
+      if (req.session.authenticated) {
+        next();
+      } else {
+        res.status(403).json({message: "Authorization failed"});
+      }
+    } else {
+      next();
+    }
+  });
+}
 
 // mainPath
 app.get(mainPath, async (req, res) => handleRequest(req, res, getAllItems));
