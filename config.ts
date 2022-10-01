@@ -1,56 +1,56 @@
-module.exports = {
+export default {
   message: {
-    badRequest: "Bad request",
-    badAuth: "Bad credentials",
-    failedAuth: "Authorization failed",
+    badRequest: "Bad request" as string,
+    badAuth: "Bad credentials" as string,
+    failedAuth: "Authorization failed" as string,
     /**
      *
      * @param {string} name property name
      * @param {string} type correct property type, not passed
      * @returns
      */
-    badProperty: (name, type) =>
+    badProperty: (name:string, type: string) =>
       `You passed wrong property, ${name} must have ${type} type.`,
-  },
+  } as object,
   sortBy: {
-    desc: -1,
-    asc: 1,
-  },
+    desc: -1 as number,
+    asc: 1 as number,
+  } as object,
   mappedTypes: {
-    id: "string",
-    note: "string",
-    date: "number",
-    query: "object",
-    options: "object",
-  },
+    id: "string" as string,
+    note: "string" as string,
+    date: "number" as string,
+    query: "object" as string,
+    options: "object" as string,
+  } as object,
   method: {
-    GET: "get",
-    POST: "post",
-    PUT: "put",
-    DELETE: "delete",
+    GET: "get" as string,
+    POST: "post" as string,
+    PUT: "put" as string,
+    DELETE: "delete" as string,
   },
   testsApi: [
     {
-      _id: "6325ff55e79521788fd0f3d7",
-      note: "welcome in my app",
-      date: 1663434665905,
-      edits: [],
+      _id: "6325ff55e79521788fd0f3d7" as string,
+      note: "welcome in my app" as string,
+      date: 1663434665905 as number,
+      edits: [] as [],
     },
     {
-      _id: "6326080a6b6db35867d0fb32",
-      note: "Welcome",
-      date: 222333,
-      edits: [],
+      _id: "6326080a6b6db35867d0fb32" as string,
+      note: "Welcome" as string,
+      date: 222333 as number,
+      edits: [] as [],
     },
     {
-      note: "POST, PUT, DELETE",
-      date: 222444333,
+      note: "POST, PUT, DELETE" as string,
+      date: 222444333 as number,
     },
     {
-      note: "new note POST, PUT, DELETE",
-      date: 222444334,
+      note: "new note POST, PUT, DELETE" as string,
+      date: 222444334 as number,
     },
-  ],
+  ] as object[],
   testsUtils: {
     basic: [
       {
@@ -100,4 +100,4 @@ module.exports = {
       }
     ]
   }
-};
+} as const;

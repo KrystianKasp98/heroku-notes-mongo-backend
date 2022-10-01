@@ -1,6 +1,6 @@
 require("dotenv").config();
 const {MongoClient, ServerApiVersion, ObjectId} = require("mongodb");
-const config = require("../config");
+const config = require("../../config");
 const uri = process.env.MONGOCLOUD_URL;
 const dbName = process.env.MONGO_DB_NAME;
 
@@ -13,7 +13,7 @@ const client = new MongoClient(uri, {
 const notes = client.db(dbName).collection("notes");
 const auth = client.db(dbName).collection("auth");
 
-class MongoApi {
+export default class MongoApi {
   // NOTES
   /**
    *
@@ -85,6 +85,3 @@ class MongoApi {
   }
 }
 
-module.exports = {
-  MongoApi,
-};

@@ -1,4 +1,4 @@
-const {app, mainPath} = require("../app");
+const {app, mainPath} = require("../src/app");
 const request = require("supertest");
 const config = require("../config.js");
 const {
